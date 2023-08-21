@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculator</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+  <style>
+    body {
+      background-color: #26536e;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+    }
+
+    .container {
+      width: 300px;
+      padding: 20px;
+      background-color: #ffffff;
+      background-color: #ffffff; /* Set the background color to transparent */
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      border-radius: 4px;
+    }
+
+    .title {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .calculator {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    .result {
+      grid-column: span 4;
+      padding: 10px;
+      font-size: 18px;
+      text-align: right;
+      background-color: #edf2f7;
+      border: 1px solid #cbd5e0;
+      border-radius: 4px;
+    }
+
+    .button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 10px;
+      font-size: 18px;
+      text-align: center;
+      background-color: #e2e8f0;
+      border: 1px solid #cbd5e0;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .button:hover {
+      background-color: #cbd5e0;
+    }
+
+    .button.span-2 {
+      grid-column: span 2;
+    }
+
+    .button.blue {
+      background-color: #4299e1;
+      color: #ffffff;
+    }
+
+    .button.blue:hover {
+      background-color: #3182ce;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="title">Calculator</h1>
+    <div class="calculator">
+      <input type="text" id="result" class="result" readonly>
+      <button class="button span-2" onclick="clearResult()">AC</button>
+      <button class="button" onclick="deleteLastCharacter()">&#9003;</button>
+      <button class="button" onclick="appendCharacter('/')">/</button>
+      <button class="button" onclick="appendCharacter('7')">7</button>
+      <button class="button" onclick="appendCharacter('8')">8</button>
+      <button class="button" onclick="appendCharacter('9')">9</button>
+      <button class="button" onclick="appendCharacter('*')">x</button>
+      <button class="button" onclick="appendCharacter('4')">4</button>
+      <button class="button" onclick="appendCharacter('5')">5</button>
+      <button class="button" onclick="appendCharacter('6')">6</button>
+      <button class="button" onclick="appendCharacter('-')">-</button>
+      <button class="button" onclick="appendCharacter('1')">1</button>
+      <button class="button" onclick="appendCharacter('2')">2</button>
+      <button class="button" onclick="appendCharacter('3')">3</button>
+      <button class="button" onclick="appendCharacter('+')">+</button>
+      <button class="button span-2" onclick="appendCharacter('0')">0</button>
+      <button class="button" onclick="appendCharacter('.')">.</button>
+      <button class="button blue span-2" onclick="calculateResult()">=</button>
+    </div>
+  </div>
+
+  <script>
+    function appendCharacter(character) {
+      const result = document.getElementById('result');
+      result.value += character;
+    }
+
+    function clearResult() {
+      const result = document.getElementById('result');
+      result.value = '';
+    }
+
+    function deleteLastCharacter() {
+      const result = document.getElementById('result');
+      result.value = result.value.slice(0, -1);
+    }
+
+    function calculateResult() {
+      const result = document.getElementById('result');
+      try {
+        const calculatedResult = eval(result.value);
+        result.value = calculatedResult;
+      } catch (error) {
+        result.value = 'Error';
+      }
+    }
+  </script>
+</body>
+</html>
